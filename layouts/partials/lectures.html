@@ -3,12 +3,11 @@
   <ul>
   {{ range .Pages.ByWeight }}
      <li>
-      {{ if .Draft }}
-        {{.Title}} (will be published soon)
-        {{ if .Site.BuildDrafts }} -  <a href="{{.RelPermalink}}">{{.Title}}</a> {{ end }}
-      {{ else }}
+        {{ if .Draft }} (draft!) {{ end }}
         <a href="{{.RelPermalink}}">{{.Title}}</a>
-      {{ end}} 
+        {{ with .Params.Lecturer }}
+        - Lecturer: {{ . }}
+        {{ end }}
     </li>
   {{ end }}
   </ul>

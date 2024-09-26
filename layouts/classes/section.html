@@ -12,22 +12,24 @@
 
 
 {{ define "main" }}
+  
+  {{ $showNextPrev := eq .Kind "page" }}
+  {{ partial "toc.html" (dict "context" . "nextPrevLinks" $showNextPrev) }}
+  
+    {{ partial "classes/semester_header.html" . }}
 
-<h1>{{.Scratch.Get "classes_page_title"}}</h1>
+    {{ with .Params.Lecturer }}
+      <h5>Lecturer: {{ . }}</h5>
+    {{ end }}
 
-{{ $showNextPrev := eq .Kind "page" }}
-{{ partial "toc.html" (dict "context" . "nextPrevLinks" $showNextPrev) }}
-
-  {{ partial "classes/semester_header.html" . }}
-
-  {{ .Content }}
-
-
-  {{ if .Params.subpages }}
-     {{ partial "sc_partials/subpages.html" (dict "page" . "depth" 4) }}
-  {{ end }}
-
-  {{ partial "classes/all_classes.html" . }}
+    {{ .Content }}
+  
+    {{ if .Params.subpages }}
+       {{ partial "sc_partials/subpages.html" (dict "page" . "depth" 4) }}
+       sub
+    {{ end }}
+  
+    {{ partial "classes/all_classes.html" . }}
 
 {{end}}
 

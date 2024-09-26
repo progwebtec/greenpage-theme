@@ -12,15 +12,14 @@
 
 {{ define "main" }}
 
-{{ $showNextPrev := eq .Kind "page" }}
-{{ partial "toc.html" (dict "context" . "nextPrevLinks" $showNextPrev) }}
-
-  {{ partial "classes/semester_header.html" . }}
-
-  {{ .Content }}
-
-  {{ partial "classes/all_classes.html" . }}
+   {{ $showNextPrev := eq .Kind "page" }}
+   {{ partial "toc.html" (dict "context" . "nextPrevLinks" $showNextPrev) }}
+   
+   {{ partial "classes/semester_header.html" . }}
+  
+   {{ .Content }}
+  
+   {{ partial "classes/all_classes.html" . }}
 
 {{end}}
-
 
