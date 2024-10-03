@@ -3,8 +3,8 @@
 
   <ul>
 {{ range sort .Site.AllPages ".Weight" "desc" }}
-    {{  if (strings.Contains .RelPermalink "m1-web") }}
-        {{  if or (hasSuffix .RelPermalink "m1-web/schedule/") (hasSuffix .RelPermalink "m1-web/complete-schedule/")}}
+    {{  if (strings.Contains .RelPermalink "m1") }}
+        {{  if or (hasSuffix .RelPermalink "m1/schedule/") (hasSuffix .RelPermalink "m1/complete-schedule/")}}
         
         <li>
         
