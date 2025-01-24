@@ -3,7 +3,7 @@
 {{ $page := .page }}
 {{ $depthS := .depth }}
 {{ $sort := .sort }}
-
+{{ $param := .param }}
 
 {{- $depth := 1 -}}
 {{ with $depthS }}
@@ -11,11 +11,13 @@
 {{ end }}
 
 
-{{ template "childs" (dict "p1" $page "depth" $depth "sort" $sort)  }}
+{{ template "childs" (dict "p1" $page "depth" $depth "sort" $sort "param" $param)  }}
 
 {{ define "childs" }}
   {{ $depth := .depth}}
   {{ $sort := .sort}}
+  {{ $param := .param}}
+  
   {{ if (gt $depth 0)}}
   {{ with .p1 }}
   <ul>
@@ -31,10 +33,12 @@
 
   
   {{ range $pages }}
+  {{ $page := .}}
   <li>{{ if .Draft }}(- draft! -){{ end }}
     <a href ="{{ .Permalink }}">{{.Title}}</a>
     {{- with .Params.source}}, source code: <a href="{{.}}">{{.}}</a>{{ end -}}
-  </li>
+    {{- with $param}}{{- with index $page.Params $param}} ({{.}} {{ $param | title }}){{ end -}}{{ end -}}
+    </li>
   {{ template "childs" (dict "p1" . "depth" (sub $depth 1) "sort" $sort )}}
   {{ end }}
   </ul>

@@ -1,4 +1,11 @@
 
 {{- $depth := .Get "depth" -}}
 {{- $sort := .Get "sort" -}}
-{{- partial "sc_partials/subpages.html" (dict "page" .Page "depth" $depth "sort" $sort) -}}
+{{- $param := .Get "site_parameter" -}}
+{{ $calling_page := .Page }}
+{{  $page := $calling_page}}
+{{ with .Get "page" }}
+    {{ $page = $calling_page.GetPage . }}
+{{ end }}
+
+{{- partial "sc_partials/subpages.html" (dict "page" $page "depth" $depth "sort" $sort "param" $param) -}}
